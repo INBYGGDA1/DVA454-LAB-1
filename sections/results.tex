@@ -1,0 +1,95 @@
+\section{Results}
+\label{section:results}
+This section presents the answers found to the questions presented in Introduction \ref{section:intro}:
+
+\subsection{1) How do you terminate the debugging session?}
+The debugging session can be terminated by clicking on the red square, terminate, which can be found in the bar at the top in the debug view or by hitting {\textasciicircum}F2 (CTRL + F2).
+
+\subsection{2) How do you terminate the program running on the dev. board?}
+The program on the development board can be terminated by pulling out the power, alternatively the program can be reset by pressing the physical reset button found on the development board.
+\subsection{3) Bitwise operations}
+\subsubsection{Bitwise operations}
+In C all bitwise operations convert the value to its binary form and then the operation is performed on the binary form.
+\begin{itemize}
+    \item \&: bitwise AND operator. Checks where the two bits correspond. If both bits are 1 the output is 1. If one bit is 0 and the other one is 0 or 1, the output is 0.
+    \item $|$: bitwise OR operator. If either bit is 1 or both are 1, the output will be one. If both values are 0 the output is 0.
+    \item \textasciicircum: bitwise XOR (exclusive or) operator. If the bits are different the output will be 1 otherwise the output is 0.
+    \item $\sim$: bitwise NOT operator. The bits are flipped, all 0 bits become 1, all 1 bits become 0. Caution should be taken to check whether signed or unsigned types is used.
+    \item $<<$: bitwise left shift operator. The bits on the left hand side are shifted x steps to the left, where x is specified by the bits on the right hand side.
+    \item $>>$: bitwise right shift operator. The bits on the left hand side are shifted x steps to the right, where x is specified by the bits on the right hand side.
+    \item *: unknown bitwise operation.
+\end{itemize}
+\subsubsection{Logical operations}
+The logical operators compares the complete value of the variables. Example: $0x01\: \&\&\: 0x02\: =\: 1 \:\&\&\: 2$.
+\begin{itemize}
+    \item \&\&: logical AND operator. Checks if both values are non-zero, returns true if both values are non-zero.
+    \item $||$: logical OR operator. Checks if either value is non-zero. Returns true if one, or both are non-zero.
+    \item *: unknown logical operator.
+\end{itemize}
+\subsubsection{Relational operations}
+The relational operations checks the decimal value and performs the operation on the decimal value.
+\begin{itemize}
+    \item $==$: equal to operator. Returns 1 if both values are equal, returns 0 otherwise.
+    \item $!=$: not equal to operator. Returns 1 if the two values are not equal, returns 0 otherwise.
+    \item $<$: less than operator. Returns 1 if the left hand side is less than the right hand side, returns 0 otherwise.
+    \item $>$: greater than operator. Returns 1 if the left hand side is greater than the right hand side, returns 0 otherwise.
+    \item $<=$: less than or equal to operator. Returns 1 if the left hand side is less than or equal to the right hand side, returns 0 otherwise.
+    \item $>=$: greater than or equal to operator. Returns 1 if the left hand side is greater than or equal to the right hand side, returns 0 otherwise.
+\end{itemize}
+\subsection{1) What is the value of the 'result' variable at each occasion it is assigned to a value?}
+See table \ref{tab:predicted_val} for the predicted and true values of the 'result' variable. The third column contains the predicted values, the fourth column contains the true values.
+
+\begin{table}[ht]
+    \centering
+    \resizebox{\columnwidth}{!}{\noindent\begin{tabular}{|l|l|l|l|}
+    \hline
+        \textbf{Operation} & \textbf{Computation} & \textbf{Prediction} & \textbf{True value} \\ \hline
+        $0x01\: \& \: 0x03$ & $0000\: 0001_2\: \& \: 0000 \;0011_2$ & $0000\: 0001_2 \:=\: 0x01$ & $0000\: 0001_2 \:=\: 0x01$ \\ \hline
+        $0x07\: \&= \:0x03$ & $0000\: 0111_2\: \&= \: 0000\: 0011_2$ & $0000\: 0011_2\: = \:0x03$ & $0000\: 0011_2\: = \:0x03$ \\ \hline
+        $0x01\: |\: 0x03$&$0000\:0001_2\: |\: 0000\:0011_2$ & $0000\:0011_2 \:= \:0x03$ & $0000\:0011_2 \:= \:0x03$ \\ \hline
+        $0x01\: \textasciicircum \: 0x03$ & $0000\: 0001_2\: \textasciicircum \:0000\: 0011_2$ & $0000\: 0010_2\: =\: 0x02$ & $0000\: 0010_2\: =\: 0x02$ \\ \hline
+        $\sim{0x01}$ & $\sim{0000\: 0001_2}$ & $1111\: 1110_2\: =\: 0xFE$ & $1111\: 1110_2\: =\: 0xFE$ \\ \hline
+        $0x02\: >>\: 1$ & $0000\: 0010_2\: >>\: 1$ & $0000\: 0001_2\: = \:0x01$ & $0000\: 0001_2\: = \:0x01$ \\ \hline
+        $0x80\: >>\: 4$ & $1000\: 0000_2\: >> \:4$ & $0000\: 1000_2\: =\: 0x08$ & $0000\: 1000_2\: =\: 0x08$ \\ \hline
+        $0x01\: << \:1$& $0000 \: 0001_2 \:<<\: 1$ & $0000\:0010_2\:=\: 0x02$ & $0000\:0010_2\:=\: 0x02$ \\ \hline
+        $0x01 \:<< \:7$&$0000 \:0001_2 \:<<\:7$ & $1000\:0000_2\:=\:0x80$ & $1000\:0000_2\:=\:0x80$ \\ \hline
+        $0x01 \:\&\&\: 0x03 $&$0000\:0001_2\: \&\& \: 0000\:0011_2\:$ & True & TRUE \\ \hline
+        $0x01 \:||\: 0x03 $& $0000\:0001_2 \: ||\: 0000\:0011_2\:$& True & TRUE \\ \hline
+    \end{tabular}}
+    \caption{The predicted and true values of the 'result' variable.}
+    \label{tab:predicted_val}
+\end{table}
+
+
+
+\subsection{2) What happens at the end of the program?}
+The program will be stuck in a busy wait while loop forever, while(TRUE);.
+
+
+
+
+
+
+\begin{comment}
+This section should present answers to all research questions.
+
+It is normal to have only one results section, but you can create more sections if finding it more appropriate. You can also divide results into subsections. Perhaps you want to refer to some other section, for example (see Section \ref{section:method}). You can also place figures, you should always reference these in the text, see Figure \ref{fig:MDHlogga} for an example of a figure including subfigures. Remember that all figures should have a figure label explaining their content.
+
+
+\begin{figure}[H]
+    \centering
+    \subfigure[MDH logo]{
+    \label{fig:MDH1}
+    \includegraphics[width=.2\columnwidth]{MDHlogga}}
+    \qquad
+    \subfigure[MDH logo]{
+    \label{fig:MDH2}
+    \includegraphics[width=.2\columnwidth]{MDHlogga}}
+    \qquad
+    \subfigure[MDH logo]{
+    \label{fig:MDH3}
+    \includegraphics[width=.2\columnwidth]{MDHlogga}}
+    \caption[Short text]{This is a example of multiple figures.}
+    \label{fig:MDHlogga}
+\end{figure}
+\end{comment}
